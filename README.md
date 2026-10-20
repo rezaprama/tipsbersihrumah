@@ -4,6 +4,8 @@ Panduan membersihkan rumah berdasarkan bahan, dengan langkah jelas dan batas pen
 
 [Buka web](https://tipsbersihrumah.rezaprama.com) · [Panduan Indonesia](docs/id.md) · [English guide](docs/en.md) · [Sumber foto dan metode](docs/sumber.md)
 
+PageSpeed Insights, 21 Oktober 2026: **100 / 100 / 100 / 100**, mobile dan desktop untuk kedua beranda. [Laporan publik dan bukti](reports/pagespeed.md). Skor adalah hasil lab saat pengujian, bukan jaminan peringkat.
+
 ![Ilustrasi dapur dengan kain mikrofiber hijau](docs/cover.webp)
 
 ## Mulai dari masalahnya
@@ -50,7 +52,7 @@ $env:AUDIT_URL = 'https://tipsbersihrumah.rezaprama.com'
 npm run audit
 ```
 
-Hasil terbaru: [laporan Lighthouse](reports/results.md). Skor adalah hasil lab pada waktu pengujian. Koneksi, perangkat, dan versi Lighthouse dapat mengubah hasil. GEO tidak punya skor baku 100/100; proyek menyediakan konten yang dapat ditelusuri, metadata, hreflang, sitemap, Article/FAQPage JSON-LD, dan `llms.txt`. Metadata tidak menjamin peringkat atau kutipan AI.
+Hasil terbaru: [PageSpeed publik](reports/pagespeed.md), [Lighthouse lokal terhadap produksi](reports/results.md), dan [verifikasi fungsi](reports/verification.md). Skor adalah hasil lab pada waktu pengujian. Koneksi, perangkat, dan versi Lighthouse dapat mengubah hasil. GEO tidak punya skor baku 100/100; proyek menyediakan konten yang dapat ditelusuri, metadata, hreflang, sitemap, Article/FAQPage JSON-LD, dan `llms.txt`. Metadata tidak menjamin peringkat atau kutipan AI.
 
 ## Ubah konten
 

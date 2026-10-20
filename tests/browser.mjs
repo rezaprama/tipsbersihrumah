@@ -10,6 +10,7 @@ try{
   const context=await browser.newContext({viewport:{width:1440,height:1000}});
   const page=await context.newPage();
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  page.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
   await page.goto(base);await page.locator('html.js').waitFor();
   assert.equal(await page.locator('.tip-preview:visible').count(),6);
   await page.locator('#search').fill('kaca');
@@ -54,7 +55,7 @@ try{
     const cta=await page.locator('.hero .button').boundingBox();assert.ok(cta.y+cta.height<(width<768?844:1000),`hero CTA below viewport at ${width}`);
     if(width===390||width===1440)for(const theme of ['light','dark']){
       await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;},theme);
-      const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+      const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze();
       assert.equal(axe.violations.length,0,JSON.stringify(axe.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))));
       await page.screenshot({path:`test-results/home-${width}-${theme}.png`,fullPage:true});
     }
@@ -62,7 +63,7 @@ try{
   results.push('360/390/768/1024/1440px overflow and hero checks; 390/1440px light/dark WCAG A/AA automated checks: passed.');
   await page.setViewportSize({width:390,height:844});
   for(const route of ['/en/','/tips/kerak/','/en/tips/botol/','/aman/','/en/sumber/']){
-    await page.goto(base+route);const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();assert.equal(axe.violations.length,0,`${route}: ${axe.violations.map(v=>v.id).join(',')}`);
+    await page.goto(base+route);const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze();assert.equal(axe.violations.length,0,`${route}: ${axe.violations.map(v=>v.id).join(',')}`);
   }
   const noJS=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
   const plain=await noJS.newPage();await plain.goto(base);

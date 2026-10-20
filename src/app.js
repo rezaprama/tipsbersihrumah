@@ -49,10 +49,11 @@
       const active = saved.has(button.dataset.save);
       button.setAttribute('aria-pressed', String(active));
       const title = button.dataset.title || '';
-      button.setAttribute('aria-label', (en ? (active ? 'Unsave: ' : 'Save: ') : (active ? 'Hapus simpanan: ' : 'Simpan: ')) + title);
-      button.title = en ? (active ? 'Unsave tip' : 'Save tip') : (active ? 'Hapus simpanan' : 'Simpan tips');
       const label = button.querySelector('[data-save-label]');
-      if (label) label.textContent = en ? (active ? 'Saved' : 'Save tip') : (active ? 'Tersimpan' : 'Simpan tips');
+      const action = label ? (en ? (active ? 'Saved' : 'Save tip') : (active ? 'Tersimpan' : 'Simpan tips')) : (en ? (active ? 'Unsave' : 'Save') : (active ? 'Hapus simpanan' : 'Simpan'));
+      button.setAttribute('aria-label', action + ': ' + title);
+      button.title = en ? (active ? 'Unsave tip' : 'Save tip') : (active ? 'Hapus simpanan' : 'Simpan tips');
+      if (label) label.textContent = action;
     });
     const count = $('#saved-count'); if (count) count.textContent = String(saved.size);
   }
